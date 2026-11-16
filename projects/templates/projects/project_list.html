@@ -1,0 +1,47 @@
+{% extends 'projects/base.html' %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Projects</h4>
+    </div>
+    <div class="card-body">
+        {% if projects %}
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Budget</th>
+                        <th>Proposal File</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for project in projects %}
+                    <tr>
+                        <td>
+                            <strong>{{ project.title }}</strong><br>
+                            <small class="text-muted">{{ project.description|truncatewords:12 }}</small>
+                        </td>
+                        <td>${{ project.budget }}</td>
+                        <td>
+                            {% if project.proposal_file %}
+                                <a href="{{ project.proposal_file.url }}" target="_blank" class="btn btn-sm btn-outline-secondary">
+                                    Download ({{ project.filename }})
+                                </a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'project_update' project.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{% url 'project_delete' project.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="text-muted mb-0">No projects found. <a href="{% url 'project_create' %}">Create one now</a>.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

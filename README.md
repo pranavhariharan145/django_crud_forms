@@ -4,20 +4,6 @@ A full-stack **Project Manager** web application built with **Django** and **Boo
 
 ---
 
-## Table of Contents
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [How It Works (Architecture & Code Walkthrough)](#how-it-works-architecture--code-walkthrough)
-  - [1. Model & Media Storage](#1-model--media-storage)
-  - [2. ModelForm & Custom Validation](#2-modelform--custom-validation)
-  - [3. CRUD Views & File Handling](#3-crud-views--file-handling)
-- [Application Walkthrough (With Screenshots)](#application-walkthrough-with-screenshots)
-- [Local Setup & Installation](#local-setup--installation)
-- [URL Endpoints](#url-endpoints)
-
----
-
 ## Features
 
 - **Full CRUD Lifecycle:** Create, list, edit, and delete project records through dedicated views and Bootstrap templates.
@@ -61,3 +47,38 @@ django_crud_forms/
 ├── screenshots/             # Documentation screenshots
 ├── db.sqlite3               # SQLite database
 └── manage.py
+
+```
+---
+## Screenshots
+
+1. **Empty Dashboard** — Initial home screen showing no projects yet.
+   ![Empty Dashboard](screenshots/01.png)
+
+2. **Create Project Form** — Blank `ModelForm` page at `/create/` for adding a new project.
+   ![Create Project Form](screenshots/02.png)
+
+3. **Custom Validation Errors** — Triggers inline errors when budget exceeds $10,000 with a short description or when a file is missing.
+   ![Custom Validation Errors](screenshots/03.png)
+
+4. **Filled Create Form** — Valid project details entered along with an attached `.pdf` proposal file.
+   ![Filled Create Form](screenshots/04.png)
+
+5. **Project Created** — Redirects to the home dashboard with a success message and download link.
+   ![Project Created](screenshots/05.png)
+
+6. **PDF File Preview** — Clicking the download button opens the uploaded PDF directly in the browser.
+   ![PDF File Preview](screenshots/06.png)
+
+7. **Delete Confirmation** — Confirmation prompt at `/<id>/delete/` before removing a project.
+   ![Delete Confirmation](screenshots/07.png)
+
+8. **Project Deleted** — Redirects back to the dashboard with a deletion confirmation alert and cleans up the file.
+   ![Project Deleted](screenshots/08.png)
+
+## How to Run
+
+```bash
+pip install django
+python manage.py migrate
+python manage.py runserver

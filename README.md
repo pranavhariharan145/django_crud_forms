@@ -1,27 +1,41 @@
 # Django CRUD Manager with ModelForms, Custom Validation & File Uploads
 
-A full-stack **Project Manager** web application built with **Django** and **Bootstrap 5**. It demonstrates complete Create, Read, Update, and Delete (CRUD) workflows using Django `ModelForm`, field-level and cross-field custom validation, flash messaging, and media file handling (PDFs, documents, and images).
+A full-stack **Project Manager** web application built with **Django** and **Bootstrap 5**. This repository demonstrates how to build complete Create, Read, Update, and Delete (CRUD) functionality from scratch using Django's `ModelForm`, multi-layered custom form validation, file uploads (`FileField`), flash notifications, and safe record deletion.
+
+---
+
+## Table of Contents
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [How It Works (Architecture & Code Walkthrough)](#how-it-works-architecture--code-walkthrough)
+  - [1. Model & Media Storage](#1-model--media-storage)
+  - [2. ModelForm & Custom Validation](#2-modelform--custom-validation)
+  - [3. CRUD Views & File Handling](#3-crud-views--file-handling)
+- [Application Walkthrough (With Screenshots)](#application-walkthrough-with-screenshots)
+- [Local Setup & Installation](#local-setup--installation)
+- [URL Endpoints](#url-endpoints)
 
 ---
 
 ## Features
 
-- **Full CRUD Operations:** Create, view, update, and delete project records via clean function-based views.
-- **ModelForm Integration:** Uses `ProjectForm` with Bootstrap-styled widgets and `ClearableFileInput` for seamless file replacement or retention during edits.
-- **Custom Validation Rules:**
-  - **Budget Validation:** Ensures the project budget is strictly greater than zero.
-  - **File Upload Validation:** Enforces a **5 MB maximum file size** and restricts uploads to `.pdf`, `.docx`, `.png`, `.jpg`, and `.jpeg`.
-  - **Cross-Field Validation:** Requires projects with a budget over **$10,000** to include a description of at least **20 characters**.
-- **Media Storage & Cleanup:** Stores uploaded proposals in `media/proposals/`, renders direct download/preview links, and automatically deletes orphaned files from disk when a project is deleted.
-- **User Feedback:** Displays dismissible Bootstrap alert banners via Django's `messages` framework after create, update, and delete actions.
+- **Full CRUD Lifecycle:** Create, list, edit, and delete project records through dedicated views and Bootstrap templates.
+- **ModelForm Integration:** Automatically maps model fields to styled HTML inputs (`TextInput`, `Textarea`, `NumberInput`, `ClearableFileInput`).
+- **Field-Level & Cross-Field Validation:**
+  - Rejects budgets less than or equal to `$0`.
+  - Restricts file uploads to **5 MB max** and allowed extensions (`.pdf`, `.docx`, `.png`, `.jpg`, `.jpeg`).
+  - Enforces a cross-field rule requiring at least **20 characters** in the description whenever a project budget exceeds **$10,000**.
+- **PDF & Document Handling:** Saves uploaded files to `media/proposals/`, serves them directly in the browser, and cleans up files from disk upon project deletion.
+- **User Feedback:** Uses Django's `messages` framework to show dismissible confirmation alerts after every action.
 
 ---
 
 ## Tech Stack
 
-- **Backend:** Python 3, Django
-- **Frontend:** HTML5, Bootstrap 5.3 (CDN)
-- **Database:** SQLite3 (default development database)
+- **Backend:** Python 3.13, Django
+- **Frontend:** HTML5, Bootstrap 5.3
+- **Database:** SQLite3
 
 ---
 
@@ -30,21 +44,20 @@ A full-stack **Project Manager** web application built with **Django** and **Boo
 ```text
 django_crud_forms/
 ├── config/
-│   ├── settings.py
-│   └── urls.py
+│   ├── settings.py          # App registration, MEDIA_URL & MEDIA_ROOT config
+│   └── urls.py              # Root routing + development media file serving
 ├── projects/
 │   ├── templates/
 │   │   └── projects/
-│   │       ├── base.html
-│   │       ├── project_list.html
-│   │       ├── project_form.html
-│   │       └── project_confirm_delete.html
-│   ├── forms.py
-│   ├── models.py
-│   ├── urls.py
-│   └── views.py
-├── media/
-│   └── proposals/
-├── screenshots/
-├── db.sqlite3
+│   │       ├── base.html                    # Shared navbar & Bootstrap alert container
+│   │       ├── project_list.html            # Read view (dashboard table)
+│   │       ├── project_form.html            # Create & Update view (multipart form)
+│   │       └── project_confirm_delete.html  # Delete confirmation prompt
+│   ├── forms.py             # ProjectForm with clean_<field>() and clean() rules
+│   ├── models.py            # Project model with FileField(upload_to='proposals/')
+│   ├── urls.py              # App-level URL patterns
+│   └── views.py             # Function-based CRUD views
+├── proposals/               # Uploaded media storage directory
+├── screenshots/             # Documentation screenshots
+├── db.sqlite3               # SQLite database
 └── manage.py

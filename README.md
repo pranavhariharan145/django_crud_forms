@@ -53,28 +53,28 @@ django_crud_forms/
 ## Screenshots
 
 1. **Empty Dashboard** — Initial home screen showing no projects yet.
-   ![Empty Dashboard](screenshots/01.png)
+   ![Empty Dashboard](screenshots/01-empty-list.png)
 
 2. **Create Project Form** — Blank `ModelForm` page at `/create/` for adding a new project.
-   ![Create Project Form](screenshots/02.png)
+   ![Create Project Form](screenshots/02-create-form-empty.png)
 
 3. **Custom Validation Errors** — Triggers inline errors when budget exceeds $10,000 with a short description or when a file is missing.
-   ![Custom Validation Errors](screenshots/03.png)
+   ![Custom Validation Errors](screenshots/03-validation-errors.png)
 
 4. **Filled Create Form** — Valid project details entered along with an attached `.pdf` proposal file.
-   ![Filled Create Form](screenshots/04.png)
+   ![Filled Create Form](screenshots/04-create-from-filled.png)
 
 5. **Project Created** — Redirects to the home dashboard with a success message and download link.
-   ![Project Created](screenshots/05.png)
+   ![Project Created](screenshots/05-project-created.png)
 
 6. **PDF File Preview** — Clicking the download button opens the uploaded PDF directly in the browser.
-   ![PDF File Preview](screenshots/06.png)
+   ![PDF File Preview](screenshots/06-pdf-preview.png)
 
 7. **Delete Confirmation** — Confirmation prompt at `/<id>/delete/` before removing a project.
-   ![Delete Confirmation](screenshots/07.png)
+   ![Delete Confirmation](screenshots/07-confirm-delete.png)
 
 8. **Project Deleted** — Redirects back to the dashboard with a deletion confirmation alert and cleans up the file.
-   ![Project Deleted](screenshots/08.png)
+   ![Project Deleted](screenshots/08-project-deleted.png)
 
 ## How to Run
 
